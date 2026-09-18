@@ -135,6 +135,7 @@
       <div class="step"><b>FINALE</b> · Stretching</div>
     </div>
     <p class="note">Forza: massimo 5 posti. Calcettone: solo venerdì alle 17:30.</p>
+    <div id="plusLink"></div>
   </section>
 
   <!-- TEST -->
@@ -212,11 +213,11 @@ const EX = {
     delfino:["Quadrupedie: orso, granchio, rana, gambero","Carriola a coppie su tratti brevi","Lotta dei galli","Salti a piedi pari dentro e fuori i cerchi","Lanci a due mani con palla leggera"],
     cerbiatto:["Circuito a corpo libero: squat, affondi, plank, ponte, superman","Capovolte e pre-acrobatica","Gradoni saltati a piedi pari","Salite brevi in corsa 10-15 m","Lanci sopra la testa con palla da 1 kg","Giochi di spinta e trazione a coppie"],
     coccodrillo:["Circuito a stazioni più lungo","Salite in corsa 15-20 m ripetute","Gradoni a balzi alternati","Lanci dorsali e rotazionali (1-2 kg)","Affondi e squat monopodalici","Core anti-rotazione a coppie con elastico"],
-    canguro:["Salite ripetute 20-30 m","Gradoni a balzi monopodalici","Circuito a corpo libero con progressione: piegamenti, trazioni alla sbarra, nordic assistito","Lanci 2-3 kg: dorsale, rotazionale, sopra la testa","Core completo"],
+    canguro:["Salite ripetute","Gradoni a balzi monopodalici","Circuito a corpo libero con progressione","Lanci 2-3 kg: dorsale, rotazionale, sopra la testa","Core completo"],
     u12:["Circuito a corpo libero a stazioni", "Gradoni saltati a piedi pari", "Salite brevi 10-15 m", "Lanci con palla 1-2 kg", "Giochi di spinta e trazione a coppie"],
     u14:["Circuito più lungo", "Salite 15-20 m ripetute", "Gradoni a balzi alternati", "Lanci dorsali e rotazionali 2 kg", "Squat e affondi monopodalici", "Core anti-rotazione"],
-    u16:["Salite ripetute 20-25 m", "Gradoni a balzi monopodalici", "Piegamenti e trazioni alla sbarra", "Lanci 2-3 kg nelle tre direzioni", "Core con progressione"],
-    u18:["Salite 25-30 m ad alta intensità", "Multibalzi e balzi monopodalici", "Trazioni, piegamenti, nordic assistito", "Lanci 3 kg", "Core completo e stabilità in disequilibrio"]
+    u16:["Salite ripetute", "Gradoni a balzi monopodalici", "Piegamenti e trazioni", "Lanci 2-3 kg nelle tre direzioni", "Core con progressione"],
+    u18:["Salite ad alta intensità", "Multibalzi e balzi monopodalici", "Trazioni, piegamenti, nordic", "Lanci 3 kg", "Core completo e stabilità in disequilibrio"]
   },
   "RESISTENZA":{
     delfino:["Giochi di movimento continuo: guardie e ladri, palla avvelenata","Staffette brevi a squadre","Percorsi da ripetere più volte"],
@@ -226,7 +227,7 @@ const EX = {
     u12:["Giochi a tempo 15″/15″", "Percorsi misti ripetuti", "Staffette lunghe a squadre"],
     u14:["Intermittente 20″/20″", "Scambi simulati senza palla", "Circuito a coppie: uno lavora, uno recupera"],
     u16:["Intermittente specifico 10-20″ con recupero 20-25″ da partita", "Punti simulati con palla medica", "Navette ripetute ad alta intensità"],
-    u18:["Punti lunghi 25-40″ per la terra", "Serie con recuperi da match: 20-25″ tra i punti, 90″ al cambio campo", "Navette con cambio di ritmo"]
+    u18:["Intermittente specifico 10-20″ con recupero 20-25″ da partita", "Punti simulati con palla medica", "Navette ripetute ad alta intensità"]
   },
   "GIOCHI":{
     delfino:["Prendersi in tutte le varianti: a coppie, a catena, con le basi","Percorsi-gara","Giochi con palloncini","Mini-giochi con racchetta morbida","Caccia al tesoro motoria"],
@@ -244,7 +245,7 @@ const EX = {
     coccodrillo:["Funicella avanzata: un piede, incrociata","Scaletta con schemi combinati","Orologio degli appoggi","Andature tecniche a ritmo imposto (battito o metronomo)","Split-step a tempo"],
     canguro:["Combinazioni funicella + scatto","Appoggi complessi su cambi di direzione","Ritmo imposto sugli spostamenti specifici","Coordinazione abbinata a stimoli visivi","Andature atletiche più complesse"],
     u12:["Funicella in tutte le varianti", "Scaletta con schemi semplici", "Equilibrio con disturbo", "Andature tecniche di corsa"],
-    u14:["Funicella avanzata", "Scaletta con schemi combinati", "Orologio degli appoggi", "Split-step a tempo"],
+    u14:["Funicella avanzata", "Scaletta con schemi combinati", "Split-step a tempo"],
     u16:["Combinazioni funicella + scatto", "Appoggi su cambi di direzione", "Ritmo imposto con metronomo", "Andature atletiche"],
     u18:["Coordinazione abbinata a stimoli visivi", "Andature atletiche complesse", "Ritmo imposto sugli spostamenti specifici del tennis"]
   }
@@ -260,6 +261,10 @@ const VISUAL = {
   u16:["Stimoli casuali con app", "Anticipazione dalla postura dell'avversario", "Doppio compito: spostamento + compito visivo"],
   u18:["Lettura della palla in uscita", "Split-step sincronizzato con metronomo", "Anticipazione in situazione di gioco", "Visione periferica sotto fatica"]
 };
+
+/* ---------- LINK ALLA WEB APP ISCRIZIONI ---------- */
+// Incolla qui il link della app "Corsi Plus" dopo averla pubblicata su Vercel.
+const PLUS_APP_URL = "";
 
 /* ---------- CORSI PLUS: rotazione giornaliera degli orari ---------- */
 const SLOTS = ["15:30 – 16:30","16:30 – 17:30","17:30 – 18:30"];
@@ -468,6 +473,18 @@ function renderPlusToday(){
      </div>`).join("") + `</div>`;
 }
 
+function renderPlusLink(){
+  const el = document.getElementById("plusLink");
+  if(!el) return;
+  el.innerHTML = PLUS_APP_URL
+    ? `<a href="${PLUS_APP_URL}" target="_blank" rel="noopener"
+         style="display:block;background:var(--terra);color:#fff;text-decoration:none;
+         border-radius:12px;padding:16px;text-align:center;font-weight:800;font-size:17px;margin-top:6px">
+         APRI LE ISCRIZIONI →</a>
+       <p class="note">Questo link è quello che ricevono gli atleti.</p>`
+    : `<p class="note">Iscrizioni: incolla il link della app "Corsi Plus" nella costante PLUS_APP_URL dentro index.html.</p>`;
+}
+
 function renderPlusWeek(){
   let h = `<table><tr><th></th>${SLOTS.map(s=>`<th>${s.replace(" – ","<br>")}</th>`).join("")}</tr>`;
   const t = todayDayIdx();
@@ -535,7 +552,7 @@ function renderRefTable(){
 
 function renderAll(){
   renderDaySelector(); renderHero(); renderChips(); renderExercises(); renderGrid();
-  renderPlusToday(); renderPlusWeek(); renderLevels();
+  renderPlusToday(); renderPlusWeek(); renderPlusLink(); renderLevels();
 }
 
 /* correzione settimana */
