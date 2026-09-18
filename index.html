@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E3A1C">
+<title>CT Scaligero · Preparazione fisica</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎾</text></svg>">
+<style>
+  :root{
+    --dark:#0E3A1C; --dark2:#16512A; --terra:#C4553B; --terra2:#A8402A;
+    --sand:#EDE7D9; --pale:#E8F0E5; --lime:#9FD27F; --ink:#14261A; --white:#fff;
+    --line:#D6D0C2;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;background:#F7F5EF;color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    padding-bottom:84px}
+  .wrap{max-width:640px;margin:0 auto;padding:0 14px}
+
+  header{background:var(--dark);color:#fff;padding:16px 0 18px;border-bottom:4px solid var(--terra)}
+  .brand{font-size:13px;letter-spacing:2px;color:var(--lime);font-weight:700}
+  .today{font-size:15px;color:#CFE3D2;margin-top:2px}
+
+  .hero{background:var(--terra);color:#fff;border-radius:16px;padding:18px;margin-top:-14px;
+    box-shadow:0 6px 18px rgba(0,0,0,.18)}
+  .hero .lab{font-size:13px;letter-spacing:2px;font-weight:700;opacity:.9}
+  .hero .theme{font-size:34px;font-weight:800;line-height:1.1;margin:4px 0 8px}
+  .hero .meta{font-size:15px;opacity:.95}
+  .weekpill{display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;
+    padding:4px 12px;font-weight:700;font-size:14px;margin-top:10px}
+
+  h2{font-size:20px;margin:26px 0 10px;color:var(--dark);font-weight:800}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;background:#fff;border:2px solid var(--line);color:var(--ink);
+    border-radius:999px;padding:9px 14px;font-size:15px;font-weight:700;cursor:pointer}
+  .chip small{display:block;font-weight:500;font-size:11px;opacity:.7}
+  .chip.on{background:var(--dark);border-color:var(--dark);color:#fff}
+  .chip.on small{opacity:.85}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+  .card h3{margin:0 0 8px;font-size:17px;color:var(--terra);font-weight:800}
+  ul.ex{margin:0;padding-left:20px}
+  ul.ex li{margin:7px 0;font-size:16px;line-height:1.35}
+
+  .vt{background:var(--dark);color:#fff;border-color:var(--dark)}
+  .vt h3{color:var(--lime)}
+  .vt ul.ex li{color:#E8F0E5}
+
+  table{width:100%;border-collapse:separate;border-spacing:3px;font-size:12px}
+  th{background:var(--dark);color:#fff;padding:7px 3px;border-radius:6px;font-size:12px}
+  td{background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 3px;
+    text-align:center;font-weight:600;line-height:1.2}
+  td.wk{background:var(--terra);color:#fff;font-weight:800;font-size:17px;border-color:var(--terra)}
+  tr.now td{background:var(--pale);border-color:var(--dark)}
+  tr.now td.wk{background:var(--dark);border-color:var(--dark)}
+  td.today{outline:3px solid var(--terra);font-weight:800}
+
+  .plus{background:var(--sand);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+  .plus h3{margin:0 0 6px;color:var(--dark);font-size:17px}
+  .modlist{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .mod{background:var(--dark);color:#fff;border-radius:10px;padding:10px 14px;font-weight:700;font-size:15px}
+  .mod.alt{background:var(--terra)}
+  .steps{display:grid;grid-template-columns:1fr;gap:6px;margin-top:8px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px}
+  .step b{color:var(--terra)}
+
+  nav{position:fixed;left:0;right:0;bottom:0;background:var(--dark);display:flex;
+    padding-bottom:env(safe-area-inset-bottom)}
+  nav button{flex:1;background:none;border:0;border-top:4px solid transparent;color:#8FB697;
+    padding:13px 2px;font-size:11.5px;font-weight:800;letter-spacing:.5px;cursor:pointer}
+  nav button.on{color:#fff;border-top-color:var(--terra)}
+
+  .note{font-size:13px;color:#4A5A50;font-style:italic;margin:8px 0 0}
+  .setbtn{background:none;border:0;color:#CFE3D2;font-size:13px;text-decoration:underline;
+    padding:0;margin-top:8px;cursor:pointer}
+  .hidden{display:none}
+  .dsel{display:flex;gap:6px;margin:10px 0 4px}
+  .dsel button{flex:1;background:#fff;border:2px solid var(--line);border-radius:10px;
+    padding:9px 0;font-weight:800;font-size:14px;color:var(--ink);cursor:pointer}
+  .dsel button.on{background:var(--dark);border-color:var(--dark);color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">CT SCALIGERO · PREPARAZIONE FISICA</div>
+    <div class="today" id="dateline"></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- OGGI -->
+  <section id="tab-oggi">
+    <div class="hero">
+      <div class="lab" id="herolab">OGGI SI LAVORA SU</div>
+      <div class="theme" id="herotheme">—</div>
+      <div class="meta" id="herometa"></div>
+      <div class="weekpill" id="heroweek"></div>
+    </div>
+
+    <div class="dsel" id="dsel"></div>
+
+    <h2>Gruppo</h2>
+    <div class="dsel" id="tiposel"></div>
+    <div class="chips" id="chips"></div>
+
+    <div id="exercises"></div>
+
+    <h2>Corsi Plus di oggi</h2>
+    <div id="plusToday"></div>
+  </section>
+
+  <!-- ROTAZIONE -->
+  <section id="tab-rot" class="hidden">
+    <h2>Rotazione delle settimane</h2>
+    <p class="note">Ogni settimana contiene tutti e cinque i temi: cambia solo il giorno. Si parte da A e si prosegue B, C, D, E, poi si ricomincia.</p>
+    <div id="grid"></div>
+    <p class="note" id="gridnote"></p>
+    <button class="setbtn" id="fixweek" style="color:#2E7D32">Correggi la settimana in corso</button>
+  </section>
+
+  <!-- PLUS -->
+  <section id="tab-plus" class="hidden">
+    <h2>Corsi Plus agonisti</h2>
+    <p class="note">Tre moduli al giorno, ruotano di orario ogni giorno. Prenotazione su BookyWay.</p>
+    <div id="plusWeek"></div>
+    <h2>Struttura di ogni seduta Plus</h2>
+    <div class="steps">
+      <div class="step"><b>INIZIALE</b> · Mobilità</div>
+      <div class="step"><b>CENTRALE</b> · Il tema del modulo</div>
+      <div class="step"><b>FINALE</b> · Stretching</div>
+    </div>
+    <p class="note">Forza: massimo 5 posti. Calcettone: solo venerdì alle 17:30.</p>
+  </section>
+
+  <!-- TEST -->
+  <section id="tab-test" class="hidden">
+    <h2>Valuta un risultato</h2>
+    <div class="card">
+      <div class="dsel" style="flex-wrap:wrap">
+        <select id="tsel" style="flex:1 1 100%;padding:10px;border:2px solid var(--line);border-radius:10px;font-size:15px;font-weight:700"></select>
+      </div>
+      <div class="dsel" id="ssel"></div>
+      <div class="dsel" id="bsel" style="flex-wrap:wrap"></div>
+      <input id="tval" type="number" step="0.01" inputmode="decimal" placeholder="Risultato"
+        style="width:100%;padding:12px;border:2px solid var(--line);border-radius:10px;font-size:18px;font-weight:700;margin-top:8px">
+      <div id="tout" style="margin-top:12px"></div>
+    </div>
+    <h2>Tabella riferimenti</h2>
+    <div id="reftab"></div>
+    <p class="note">Valori indicativi di partenza: dopo la prima campagna di test si ritarano sui dati reali del circolo. Il file Excel completo è su Drive.</p>
+  </section>
+
+  <!-- LIVELLI -->
+  <section id="tab-liv" class="hidden">
+    <h2>Livelli e fasce d'età</h2>
+    <div id="levels"></div>
+    <p class="note">Il sistema animali FITP vale per la scuola tennis. Gli agonisti seguono le categorie Under: stessi macro argomenti, contenuti più strutturati e orientati ai tornei. Si cambia livello per competenze acquisite, non per età anagrafica.</p>
+  </section>
+
+</div>
+
+<nav>
+  <button data-tab="oggi" class="on">OGGI</button>
+  <button data-tab="rot">ROTAZIONE</button>
+  <button data-tab="plus">PLUS</button>
+  <button data-tab="test">TEST</button>
+  <button data-tab="liv">LIVELLI</button>
+</nav>
+
+<script>
+/* ---------- DATI ---------- */
+const THEMES = ["VELOCITÀ","FORZA","COORDINAZIONE / RITMO","RESISTENZA","GIOCHI"];
+// indici tema per settimana A..E, giorni lun..ven
+const GRID = {
+  A:[0,1,2,3,4],
+  B:[2,3,4,0,1],
+  C:[4,0,1,2,3],
+  D:[1,2,3,4,0],
+  E:[3,4,0,1,2]
+};
+const WEEKS = ["A","B","C","D","E"];
+const DAYS = ["LUN","MAR","MER","GIO","VEN"];
+
+const LEVELS = [
+  {id:"delfino",    tipo:"scuola",  nome:"DELFINO",     eta:"5-8",   fase:"Avviamento / minitennis"},
+  {id:"cerbiatto",  tipo:"scuola",  nome:"CERBIATTO",   eta:"8-11",  fase:"Pre-perfezionamento"},
+  {id:"coccodrillo",tipo:"scuola",  nome:"COCCODRILLO", eta:"11-14", fase:"Perfezionamento"},
+  {id:"canguro",    tipo:"scuola",  nome:"CANGURO",     eta:"14-18", fase:"Specializzazione"},
+  {id:"u12",        tipo:"agonisti",nome:"UNDER 12",    eta:"fino a 12", fase:"Avviamento all'agonismo"},
+  {id:"u14",        tipo:"agonisti",nome:"UNDER 14",    eta:"12-14", fase:"Pre-agonismo"},
+  {id:"u16",        tipo:"agonisti",nome:"UNDER 16",    eta:"14-16", fase:"Agonismo"},
+  {id:"u18",        tipo:"agonisti",nome:"UNDER 18",    eta:"16-18", fase:"Agonismo avanzato"}
+];
+
+const EX = {
+  "VELOCITÀ":{
+    delfino:["Partenze al via da posizioni diverse (seduti, proni, in ginocchio) su 5-6 m","Giochi di inseguimento","Acchiappa il cinesino a coppie","Corsa e stop al segnale","Staffette brevi"],
+    cerbiatto:["Scatti 8-10 m preceduti da split-step","Navette brevi con tocco a terra","Specchio a coppie (uno guida, l'altro insegue)","Frequenza tra i cinesini","Partenze su segnale acustico e visivo"],
+    coccodrillo:["Accelerazioni 10-15 m","Cambi di direzione a chiamata","Percorso a X con i coni","Spider: raccolta palline su 4 angoli","Navette in open stance","Decelerazione e frenata controllata"],
+    canguro:["Accelerazioni 15-20 m","T-agility","Navette open e neutral cronometrate","Frenate e ripartenze","Sprint con cambio di direzione su stimolo","Split-step temporizzato sull'impatto"],
+    u12:["Accelerazioni 10-15 m da posizioni varie", "Frequenza e qualità degli appoggi", "Navette brevi con tocco a terra", "Split-step al segnale", "Sfide di reazione 1c1"],
+    u14:["Accelerazioni 15-20 m", "Cambi di direzione a chiamata", "Percorso a X", "Spider su 4 palline", "Decelerazione controllata e ripartenza"],
+    u16:["Accelerazioni 20 m cronometrate", "T-agility", "Navette open e neutral a tempo", "Frenate e ripartenze", "Sprint su stimolo visivo"],
+    u18:["Velocità massima sui 20 m", "Agility test a tempo", "Spostamenti specifici con colpo ombra", "Split-step temporizzato sull'impatto", "Ripetute di qualità con recupero pieno"]
+  },
+  "FORZA":{
+    delfino:["Quadrupedie: orso, granchio, rana, gambero","Carriola a coppie su tratti brevi","Lotta dei galli","Salti a piedi pari dentro e fuori i cerchi","Lanci a due mani con palla leggera"],
+    cerbiatto:["Circuito a corpo libero: squat, affondi, plank, ponte, superman","Capovolte e pre-acrobatica","Gradoni saltati a piedi pari","Salite brevi in corsa 10-15 m","Lanci sopra la testa con palla da 1 kg","Giochi di spinta e trazione a coppie"],
+    coccodrillo:["Circuito a stazioni più lungo","Salite in corsa 15-20 m ripetute","Gradoni a balzi alternati","Lanci dorsali e rotazionali (1-2 kg)","Affondi e squat monopodalici","Core anti-rotazione a coppie con elastico"],
+    canguro:["Salite ripetute 20-30 m","Gradoni a balzi monopodalici","Circuito a corpo libero con progressione: piegamenti, trazioni alla sbarra, nordic assistito","Lanci 2-3 kg: dorsale, rotazionale, sopra la testa","Core completo"],
+    u12:["Circuito a corpo libero a stazioni", "Gradoni saltati a piedi pari", "Salite brevi 10-15 m", "Lanci con palla 1-2 kg", "Giochi di spinta e trazione a coppie"],
+    u14:["Circuito più lungo", "Salite 15-20 m ripetute", "Gradoni a balzi alternati", "Lanci dorsali e rotazionali 2 kg", "Squat e affondi monopodalici", "Core anti-rotazione"],
+    u16:["Salite ripetute 20-25 m", "Gradoni a balzi monopodalici", "Piegamenti e trazioni alla sbarra", "Lanci 2-3 kg nelle tre direzioni", "Core con progressione"],
+    u18:["Salite 25-30 m ad alta intensità", "Multibalzi e balzi monopodalici", "Trazioni, piegamenti, nordic assistito", "Lanci 3 kg", "Core completo e stabilità in disequilibrio"]
+  },
+  "RESISTENZA":{
+    delfino:["Giochi di movimento continuo: guardie e ladri, palla avvelenata","Staffette brevi a squadre","Percorsi da ripetere più volte"],
+    cerbiatto:["Giochi a tempo 15\" lavoro / 15\" recupero","Staffette lunghe","Percorsi misti corsa-salti-slalom ripetuti","Conquista i cerchi a squadre"],
+    coccodrillo:["Intermittente 20\"/20\"","Percorsi tecnico-atletici ripetuti","Scambi simulati senza palla","Circuito a coppie: uno lavora, uno recupera"],
+    canguro:["Intermittente specifico 10-20\" con recupero 20-25\" come in partita","Punti simulati con palla medica","Serie di punti lunghi 25-40\" (preparazione terra)","Navette ripetute ad alta intensità"],
+    u12:["Giochi a tempo 15″/15″", "Percorsi misti ripetuti", "Staffette lunghe a squadre"],
+    u14:["Intermittente 20″/20″", "Scambi simulati senza palla", "Circuito a coppie: uno lavora, uno recupera"],
+    u16:["Intermittente specifico 10-20″ con recupero 20-25″ da partita", "Punti simulati con palla medica", "Navette ripetute ad alta intensità"],
+    u18:["Punti lunghi 25-40″ per la terra", "Serie con recuperi da match: 20-25″ tra i punti, 90″ al cambio campo", "Navette con cambio di ritmo"]
+  },
+  "GIOCHI":{
+    delfino:["Prendersi in tutte le varianti: a coppie, a catena, con le basi","Percorsi-gara","Giochi con palloncini","Mini-giochi con racchetta morbida","Caccia al tesoro motoria"],
+    cerbiatto:["Staffette a squadre","Ruba-coda","Palla avvelenata","Tennis con le mani","Giochi propedeutici con regole semplificate","Percorso a tempo a squadre"],
+    coccodrillo:["Giochi sportivi: calcio, pallamano, palla impazzita","Tornei a stazioni","Gare a punteggio","Sfide 1c1 di agilità"],
+    canguro:["Giochi sportivi a tempo","Gare di agilità cronometrate","Sfide 1c1 e a squadre","Tornei atletici"],
+    u12:["Giochi sportivi con regole adattate", "Tornei a stazioni", "Sfide 1c1 di agilità", "Percorsi-gara a squadre"],
+    u14:["Giochi sportivi a tempo", "Gare a punteggio", "Percorsi-sfida cronometrati"],
+    u16:["Calcetto e pallamano a tempo", "Gare di agilità cronometrate", "Sfide a squadre"],
+    u18:["Calcettone del venerdì", "Gare cronometrate", "Tornei atletici interni di fine blocco"]
+  },
+  "COORDINAZIONE / RITMO":{
+    delfino:["Andature imitative (animali)","Camminare su linee e cordicelle","Saltelli dentro/fuori i cerchi","Lanci e prese con palle di misure diverse","Battere le mani a tempo mentre si cammina"],
+    cerbiatto:["Funicella: piedi pari, alternati","Scaletta con schemi semplici","Percorso a stazioni con cambi di direzione","Equilibrio su un piede con disturbo","Il cameriere: palla in equilibrio sulla racchetta"],
+    coccodrillo:["Funicella avanzata: un piede, incrociata","Scaletta con schemi combinati","Orologio degli appoggi","Andature tecniche a ritmo imposto (battito o metronomo)","Split-step a tempo"],
+    canguro:["Combinazioni funicella + scatto","Appoggi complessi su cambi di direzione","Ritmo imposto sugli spostamenti specifici","Coordinazione abbinata a stimoli visivi","Andature atletiche più complesse"],
+    u12:["Funicella in tutte le varianti", "Scaletta con schemi semplici", "Equilibrio con disturbo", "Andature tecniche di corsa"],
+    u14:["Funicella avanzata", "Scaletta con schemi combinati", "Orologio degli appoggi", "Split-step a tempo"],
+    u16:["Combinazioni funicella + scatto", "Appoggi su cambi di direzione", "Ritmo imposto con metronomo", "Andature atletiche"],
+    u18:["Coordinazione abbinata a stimoli visivi", "Andature atletiche complesse", "Ritmo imposto sugli spostamenti specifici del tennis"]
+  }
+};
+
+const VISUAL = {
+  delfino:["Seguire con gli occhi la palla che rotola o rimbalza","Prendere palline al volo","Partire verso il colore chiamato","Guardare il bersaglio prima di lanciare"],
+  cerbiatto:["Due colori due direzioni","Reazione al segnale dato di lato (visione periferica)","Prendere la palla chiamando il colore","Lanci e prese in movimento"],
+  coccodrillo:["Doppio stimolo: colore = dove andare, numero = cosa fare","Segnale a lampo (mano mostrata per un attimo)","Leggere la direzione dal movimento del compagno","Fissare il punto d'impatto prima di partire"],
+  canguro:["Stimoli a segnali casuali con app","Anticipazione dalla postura dell'avversario","Doppio compito: spostamento + compito visivo","Lettura della palla in uscita e split-step sincronizzato (metronomo)"],
+  u12:["Due colori due direzioni", "Reazione al segnale laterale", "Chiamare il numero sulla palla prima di colpire", "Lanci e prese in movimento"],
+  u14:["Doppio stimolo colore + numero", "Segnale a lampo", "Lettura della direzione dal movimento del compagno", "Fissare il punto d'impatto"],
+  u16:["Stimoli casuali con app", "Anticipazione dalla postura dell'avversario", "Doppio compito: spostamento + compito visivo"],
+  u18:["Lettura della palla in uscita", "Split-step sincronizzato con metronomo", "Anticipazione in situazione di gioco", "Visione periferica sotto fatica"]
+};
+
+/* ---------- CORSI PLUS: rotazione giornaliera degli orari ---------- */
+const SLOTS = ["15:30 – 16:30","16:30 – 17:30","17:30 – 18:30"];
+// per ogni giorno lun..ven i tre moduli nei tre slot
+const PLUS = {
+  0:["FORZA","VELOCITÀ","RESISTENZA"],
+  1:["VELOCITÀ","RESISTENZA","FORZA"],
+  2:["RESISTENZA","FORZA","VELOCITÀ"],
+  3:["FORZA","VELOCITÀ","RESISTENZA"],
+  4:["VELOCITÀ","RESISTENZA","CALCETTONE"]
+};
+
+/* ---------- TEST: valori di riferimento per fascia d'età ---------- */
+const TESTS = [
+  {n:"Sit and reach",     u:"cm", verso:"alto"},
+  {n:"Salto in lungo",    u:"cm", verso:"alto"},
+  {n:"Lancio dorsale",    u:"m",  verso:"alto"},
+  {n:"Navetta 8 m × 6",   u:"s",  verso:"basso"},
+  {n:"Sprint 20 m",       u:"s",  verso:"basso"},
+  {n:"Navetta 5 m × 4",   u:"s",  verso:"basso"},
+  {n:"Beep test",         u:"m",  verso:"alto"}
+];
+const BANDS = ["8-9","10-11","12-13","14-15","16-18"];
+// soglie [ottimo, buono, sufficiente] per fascia
+const REF = {
+  M:{
+  "Sit and reach":   [[25,18,10],[26,19,11],[27,20,12],[28,21,13],[30,23,15]],
+  "Salto in lungo":  [[150,130,110],[165,145,125],[185,160,140],[205,180,155],[225,200,175]],
+  "Lancio dorsale":  [[6.0,5.0,4.0],[7.0,6.0,5.0],[8.5,7.0,6.0],[10.0,8.5,7.0],[11.5,10.0,8.5]],
+  "Navetta 8 m × 6": [[15.5,16.5,17.5],[14.8,15.8,16.8],[14.0,15.0,16.0],[13.3,14.3,15.3],[12.8,13.8,14.8]],
+  "Sprint 20 m":     [[4.00,4.30,4.60],[3.80,4.10,4.40],[3.55,3.85,4.15],[3.30,3.60,3.90],[3.15,3.45,3.75]],
+  "Navetta 5 m × 4": [[6.30,6.80,7.30],[6.00,6.50,7.00],[5.70,6.20,6.70],[5.45,5.95,6.45],[5.30,5.80,6.30]],
+  "Beep test":       [[900,700,500],[1100,850,600],[1300,1000,750],[1500,1200,900],[1700,1350,1000]]
+  },
+  F:{
+  "Sit and reach":   [[27,20,12],[29,22,14],[31,24,16],[32,25,17],[33,26,18]],
+  "Salto in lungo":  [[145,125,105],[158,138,118],[172,150,130],[180,158,138],[190,168,145]],
+  "Lancio dorsale":  [[5.5,4.5,3.6],[6.4,5.4,4.4],[7.5,6.2,5.2],[8.3,7.0,5.8],[9.0,7.6,6.3]],
+  "Navetta 8 m × 6": [[15.9,16.9,17.9],[15.3,16.3,17.3],[14.7,15.7,16.7],[14.3,15.3,16.3],[14.0,15.0,16.0]],
+  "Sprint 20 m":     [[4.10,4.40,4.70],[3.92,4.22,4.52],[3.75,4.05,4.35],[3.62,3.92,4.22],[3.55,3.85,4.15]],
+  "Navetta 5 m × 4": [[6.45,6.95,7.45],[6.20,6.70,7.20],[5.98,6.48,6.98],[5.82,6.32,6.82],[5.72,6.22,6.72]],
+  "Beep test":       [[800,620,450],[950,740,520],[1080,840,620],[1180,920,680],[1250,980,720]]
+  }
+};
+const LIV = [
+  {n:1,l:"OTTIMO",     c:"#63BE7B"},
+  {n:2,l:"BUONO",      c:"#FFEB84"},
+  {n:3,l:"SUFFICIENTE",c:"#FCAA5B"},
+  {n:4,l:"SCARSO",     c:"#F8696B"}
+];
+function valuta(test, bandIdx, v, sex){
+  const t = TESTS.find(x=>x.n===test);
+  const s = REF[sex][test][bandIdx];
+  const ok = (x,soglia)=> t.verso==="alto" ? x>=soglia : x<=soglia;
+  if(ok(v,s[0])) return 1;
+  if(ok(v,s[1])) return 2;
+  if(ok(v,s[2])) return 3;
+  return 4;
+}
+
+// Lunedì di riferimento = settimana A. Modificabile dall'app.
+const DEFAULT_ANCHOR = "2026-10-05";
+const store = {
+  get(k,d){ try{ return localStorage.getItem(k) ?? d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+
+function mondayOf(d){
+  const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const dow = (x.getDay()+6)%7; // lun=0
+  x.setDate(x.getDate()-dow);
+  return x;
+}
+function currentWeekLetter(){
+  const anchor = mondayOf(new Date(store.get("anchor",DEFAULT_ANCHOR)+"T12:00:00"));
+  const thisMon = mondayOf(new Date());
+  const diff = Math.round((thisMon - anchor)/(7*24*3600*1000));
+  return WEEKS[((diff % 5)+5)%5];
+}
+let selLevel = store.get("level","cerbiatto");
+let selTipo  = store.get("tipo","scuola");
+let selDayIdx = null; // null = oggi
+
+function todayDayIdx(){
+  const dow = (new Date().getDay()+6)%7; // lun=0 .. dom=6
+  return dow <= 4 ? dow : null; // weekend -> nessun giorno
+}
+
+/* ---------- RENDER ---------- */
+const fmt = new Intl.DateTimeFormat("it-IT",{weekday:"long",day:"numeric",month:"long"});
+document.getElementById("dateline").textContent =
+  fmt.format(new Date()).replace(/^./,c=>c.toUpperCase());
+
+function themeFor(dayIdx){
+  return THEMES[ GRID[currentWeekLetter()][dayIdx] ];
+}
+
+function renderDaySelector(){
+  const el = document.getElementById("dsel");
+  const t = todayDayIdx();
+  el.innerHTML = DAYS.map((d,i)=>{
+    const active = (selDayIdx===null ? i===t : i===selDayIdx);
+    return `<button data-d="${i}" class="${active?"on":""}">${d}</button>`;
+  }).join("");
+  el.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    selDayIdx = +b.dataset.d; renderAll();
+  });
+}
+
+function renderHero(){
+  const t = todayDayIdx();
+  const idx = selDayIdx===null ? t : selDayIdx;
+  const wk = currentWeekLetter();
+  const lab = document.getElementById("herolab");
+  const meta = document.getElementById("herometa");
+  if(idx===null){
+    lab.textContent = "WEEKEND";
+    document.getElementById("herotheme").textContent = "Nessuna seduta";
+    meta.textContent = "Scegli un giorno qui sotto per vedere il tema.";
+  } else {
+    const isToday = (selDayIdx===null || selDayIdx===t);
+    lab.textContent = isToday ? "OGGI SI LAVORA SU" : DAYS[idx]+" SI LAVORA SU";
+    document.getElementById("herotheme").textContent = THEMES[GRID[wk][idx]];
+    meta.textContent = "Stesso tema per tutti i gruppi · contenuti diversi per età";
+  }
+  document.getElementById("heroweek").textContent = "Settimana "+wk;
+}
+
+function renderChips(){
+  const ts = document.getElementById("tiposel");
+  ts.innerHTML = [["scuola","SCUOLA TENNIS"],["agonisti","AGONISTI"]].map(([k,l])=>
+    `<button data-t="${k}" class="${k===selTipo?"on":""}">${l}</button>`).join("");
+  ts.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    selTipo = b.dataset.t; store.set("tipo",selTipo);
+    const first = LEVELS.find(l=>l.tipo===selTipo);
+    selLevel = first.id; store.set("level",selLevel);
+    renderAll();
+  });
+  const el = document.getElementById("chips");
+  el.innerHTML = LEVELS.filter(l=>l.tipo===selTipo).map(l=>
+    `<button class="chip ${l.id===selLevel?"on":""}" data-l="${l.id}">${l.nome}<small>${l.eta} anni</small></button>`
+  ).join("");
+  el.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
+    selLevel=b.dataset.l; store.set("level",selLevel); renderAll();
+  });
+}
+
+function renderExercises(){
+  const box = document.getElementById("exercises");
+  const t = todayDayIdx();
+  const idx = selDayIdx===null ? t : selDayIdx;
+  if(idx===null){ box.innerHTML=""; return; }
+  const theme = THEMES[GRID[currentWeekLetter()][idx]];
+  const list = (EX[theme]||{})[selLevel]||[];
+  let html = `<div class="card"><h3>${theme}</h3><ul class="ex">${
+    list.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+  if(theme==="VELOCITÀ"){
+    html += `<div class="card vt"><h3>Visual training</h3>
+      <ul class="ex">${VISUAL[selLevel].map(x=>`<li>${x}</li>`).join("")}</ul>
+      <p class="note" style="color:#B9D2BD">Da inserire quando possibile negli allenamenti di velocità.</p></div>`;
+  }
+  box.innerHTML = html;
+}
+
+function renderGrid(){
+  const wk = currentWeekLetter();
+  const t = todayDayIdx();
+  let h = `<table><tr><th></th>${DAYS.map(d=>`<th>${d}</th>`).join("")}</tr>`;
+  WEEKS.forEach(w=>{
+    h += `<tr class="${w===wk?"now":""}"><td class="wk">${w}</td>`;
+    GRID[w].forEach((ti,i)=>{
+      const hot = (w===wk && i===t) ? "today":"";
+      h += `<td class="${hot}">${THEMES[ti].replace(" / ","/<br>")}</td>`;
+    });
+    h += `</tr>`;
+  });
+  h += `</table>`;
+  document.getElementById("grid").innerHTML = h;
+  document.getElementById("gridnote").textContent =
+    "Siamo nella settimana "+wk+". La riga evidenziata è quella in corso.";
+}
+
+function renderLevels(){
+  const box = document.getElementById("levels");
+  let h = "";
+  [["scuola","SCUOLA TENNIS"],["agonisti","AGONISTI"]].forEach(([t,lab])=>{
+    h += `<div style="background:var(--terra);color:#fff;border-radius:10px;padding:8px 12px;
+      font-weight:800;font-size:15px;letter-spacing:1px;margin:14px 0 8px">${lab}</div>`;
+    h += LEVELS.filter(l=>l.tipo===t).map(l=>
+      `<div class="card"><h3>${l.nome} · ${l.eta} anni</h3>
+       <div style="font-size:15px"><b>${l.fase}</b></div></div>`).join("");
+  });
+  box.innerHTML = h;
+}
+
+function renderPlusToday(){
+  const t = todayDayIdx();
+  const idx = selDayIdx===null ? t : selDayIdx;
+  const box = document.getElementById("plusToday");
+  if(idx===null){ box.innerHTML = `<p class="note">Nessun corso Plus nel weekend.</p>`; return; }
+  box.innerHTML = `<div class="steps">` + PLUS[idx].map((m,i)=>
+    `<div class="step" style="display:flex;align-items:center;gap:10px">
+       <span style="background:var(--dark);color:#fff;border-radius:8px;padding:6px 9px;font-weight:800;font-size:13px;white-space:nowrap">${SLOTS[i]}</span>
+       <b style="font-size:16px;color:${m==="CALCETTONE"?"var(--terra)":"var(--dark)"}">${m}</b>
+       ${m==="FORZA"?'<span style="font-size:12px;color:#4A5A50">max 5</span>':""}
+     </div>`).join("") + `</div>`;
+}
+
+function renderPlusWeek(){
+  let h = `<table><tr><th></th>${SLOTS.map(s=>`<th>${s.replace(" – ","<br>")}</th>`).join("")}</tr>`;
+  const t = todayDayIdx();
+  DAYS.forEach((d,i)=>{
+    h += `<tr class="${i===t?"now":""}"><td class="wk" style="font-size:13px">${d}</td>`;
+    PLUS[i].forEach(m=>{
+      const cal = m==="CALCETTONE";
+      h += `<td style="${cal?"background:#C4553B;color:#fff;border-color:#C4553B":""}">${m}</td>`;
+    });
+    h += `</tr>`;
+  });
+  h += `</table>`;
+  document.getElementById("plusWeek").innerHTML = h;
+}
+
+/* ---- TEST ---- */
+let selTest = TESTS[0].n, selBand = 2, selSex = "M";
+function renderTestUI(){
+  const sel = document.getElementById("tsel");
+  if(!sel.options.length){
+    sel.innerHTML = TESTS.map(t=>`<option value="${t.n}">${t.n} (${t.u})</option>`).join("");
+    sel.onchange = ()=>{ selTest = sel.value; calcTest(); renderRefTable(); };
+  }
+  const sx = document.getElementById("ssel");
+  sx.innerHTML = [["M","MASCHI"],["F","FEMMINE"]].map(([k,l])=>
+    `<button data-s="${k}" class="${k===selSex?"on":""}">${l}</button>`).join("");
+  sx.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    selSex = b.dataset.s; renderTestUI(); calcTest(); renderRefTable();
+  });
+  const bs = document.getElementById("bsel");
+  bs.innerHTML = BANDS.map((b,i)=>
+    `<button data-b="${i}" class="${i===selBand?"on":""}">${b}</button>`).join("");
+  bs.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    selBand = +b.dataset.b; renderTestUI(); calcTest(); renderRefTable();
+  });
+  document.getElementById("tval").oninput = calcTest;
+}
+function calcTest(){
+  const v = parseFloat(document.getElementById("tval").value.replace(",","."));
+  const out = document.getElementById("tout");
+  if(isNaN(v)){ out.innerHTML=""; return; }
+  const lvl = valuta(selTest, selBand, v, selSex);
+  const L = LIV[lvl-1];
+  out.innerHTML = `<div style="background:${L.c};border-radius:12px;padding:16px;text-align:center">
+     <div style="font-size:13px;font-weight:700;opacity:.75">LIVELLO ${L.n}</div>
+     <div style="font-size:28px;font-weight:800">${L.l}</div>
+     <div style="font-size:13px;margin-top:4px">${selTest} · ${BANDS[selBand]} anni · ${selSex==="M"?"maschi":"femmine"}</div></div>`;
+}
+function renderRefTable(){
+  const s = REF[selSex][selTest][selBand];
+  const t = TESTS.find(x=>x.n===selTest);
+  const seg = t.verso==="alto" ? "almeno" : "entro";
+  let h = `<div class="card"><h3>${selTest} · ${BANDS[selBand]} anni · ${selSex==="M"?"maschi":"femmine"}</h3>
+    <div style="font-size:13px;color:#4A5A50;margin-bottom:8px">${t.verso==="alto"?"Più alto è meglio":"Più basso è meglio"}</div>`;
+  LIV.forEach((L,i)=>{
+    const val = i<3 ? `${seg} ${s[i]} ${t.u}` : (t.verso==="alto"?`sotto ${s[2]} ${t.u}`:`oltre ${s[2]} ${t.u}`);
+    h += `<div style="display:flex;align-items:center;gap:10px;margin:6px 0">
+      <span style="background:${L.c};width:34px;height:34px;border-radius:8px;display:inline-flex;
+        align-items:center;justify-content:center;font-weight:800">${L.n}</span>
+      <b style="flex:1">${L.l}</b><span style="font-size:15px">${val}</span></div>`;
+  });
+  h += `</div>`;
+  document.getElementById("reftab").innerHTML = h;
+}
+
+function renderAll(){
+  renderDaySelector(); renderHero(); renderChips(); renderExercises(); renderGrid();
+  renderPlusToday(); renderPlusWeek(); renderLevels();
+}
+
+/* correzione settimana */
+document.getElementById("fixweek").onclick = ()=>{
+  const cur = currentWeekLetter();
+  const v = prompt("In quale settimana siamo davvero? (A, B, C, D o E)", cur);
+  if(!v) return;
+  const L = v.trim().toUpperCase();
+  if(!WEEKS.includes(L)){ alert("Scrivi solo A, B, C, D o E."); return; }
+  // sposta l'ancora in modo che questa settimana corrisponda alla lettera scelta
+  const thisMon = mondayOf(new Date());
+  const shift = WEEKS.indexOf(L);
+  const newAnchor = new Date(thisMon);
+  newAnchor.setDate(newAnchor.getDate() - shift*7);
+  store.set("anchor", newAnchor.toISOString().slice(0,10));
+  renderAll();
+};
+
+/* tabs */
+document.querySelectorAll("nav button").forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll("nav button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    ["oggi","rot","plus","test","liv"].forEach(t=>{
+      document.getElementById("tab-"+t).classList.toggle("hidden", t!==b.dataset.tab);
+    });
+    window.scrollTo(0,0);
+  };
+});
+
+renderLevels();
+renderTestUI();
+renderRefTable();
+renderAll();
+</script>
+</body>
+</html>
