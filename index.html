@@ -490,6 +490,20 @@ function renderPlusToday(){
      </div>`).join("") + `</div>`;
 }
 
+function renderPlusLink(){
+  const el = document.getElementById("plusLinkTop");
+  if(!el) return;
+  el.innerHTML = `
+    <a href="${PLUS_APP_URL}" target="_blank" rel="noopener"
+       style="display:block;background:var(--terra);color:#fff;text-decoration:none;
+       border-radius:14px;padding:20px 16px;text-align:center;margin:4px 0 12px;
+       box-shadow:0 4px 14px rgba(196,85,59,.35)">
+       <span style="display:block;font-size:12px;letter-spacing:2px;font-weight:700;opacity:.9">APP ISCRIZIONI ATLETI</span>
+       <span style="display:block;font-size:24px;font-weight:800;margin-top:4px">APRI I CORSI PLUS →</span>
+    </a>
+    <p class="note" style="margin-top:-6px">È la stessa app che usano i ragazzi: iscritti, riserve e riepilogo.</p>`;
+}
+
 function renderPlusWeek(){
   let h = `<table><tr><th></th>${SLOTS.map(s=>`<th>${s.replace(" – ","<br>")}</th>`).join("")}</tr>`;
   const t = todayDayIdx();
