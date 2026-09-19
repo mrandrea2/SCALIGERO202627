@@ -37,7 +37,7 @@ Se la rotazione si disallinea (pausa, festivita'), si corregge dall'app:
 ## Corsi Plus
 
 Tre moduli al giorno che ruotano di orario: 15:30, 16:30, 17:30.
-Il venerdi' alle 17:30 c'e' il calcettone. Forza: massimo 5 posti. Prenotazione su BookyWay.
+Il venerdi' alle 17:30 c'e' il calcettone. Forza: massimo 5 posti. Gli atleti si iscrivono dalla app Corsi Plus (https://bit.ly/PLUSSCALIGERO).
 
 ## Test
 

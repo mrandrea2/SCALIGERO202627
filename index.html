@@ -126,7 +126,8 @@
   <!-- PLUS -->
   <section id="tab-plus" class="hidden">
     <h2>Corsi Plus agonisti</h2>
-    <p class="note">Tre moduli al giorno, ruotano di orario ogni giorno. Prenotazione su BookyWay.</p>
+    <div id="plusLinkTop"></div>
+    <p class="note">Tre moduli al giorno, ruotano di orario ogni giorno. Gli atleti si iscrivono dalla app Corsi Plus.</p>
     <div id="plusWeek"></div>
     <h2>Struttura di ogni seduta Plus</h2>
     <div class="steps">
@@ -135,7 +136,6 @@
       <div class="step"><b>FINALE</b> · Stretching</div>
     </div>
     <p class="note">Forza: massimo 5 posti. Calcettone: solo venerdì alle 17:30.</p>
-    <div id="plusLink"></div>
   </section>
 
   <!-- TEST -->
@@ -263,8 +263,8 @@ const VISUAL = {
 };
 
 /* ---------- LINK ALLA WEB APP ISCRIZIONI ---------- */
-// Incolla qui il link della app "Corsi Plus" dopo averla pubblicata su Vercel.
-const PLUS_APP_URL = "";
+// App iscrizioni Corsi Plus (quella che ricevono gli atleti).
+const PLUS_APP_URL = "https://bit.ly/PLUSSCALIGERO";
 
 /* ---------- CORSI PLUS: rotazione giornaliera degli orari ---------- */
 const SLOTS = ["15:30 – 16:30","16:30 – 17:30","17:30 – 18:30"];
@@ -474,15 +474,17 @@ function renderPlusToday(){
 }
 
 function renderPlusLink(){
-  const el = document.getElementById("plusLink");
+  const el = document.getElementById("plusLinkTop");
   if(!el) return;
-  el.innerHTML = PLUS_APP_URL
-    ? `<a href="${PLUS_APP_URL}" target="_blank" rel="noopener"
-         style="display:block;background:var(--terra);color:#fff;text-decoration:none;
-         border-radius:12px;padding:16px;text-align:center;font-weight:800;font-size:17px;margin-top:6px">
-         APRI LE ISCRIZIONI →</a>
-       <p class="note">Questo link è quello che ricevono gli atleti.</p>`
-    : `<p class="note">Iscrizioni: incolla il link della app "Corsi Plus" nella costante PLUS_APP_URL dentro index.html.</p>`;
+  el.innerHTML = `
+    <a href="${PLUS_APP_URL}" target="_blank" rel="noopener"
+       style="display:block;background:var(--terra);color:#fff;text-decoration:none;
+       border-radius:14px;padding:20px 16px;text-align:center;margin:4px 0 12px;
+       box-shadow:0 4px 14px rgba(196,85,59,.35)">
+       <span style="display:block;font-size:12px;letter-spacing:2px;font-weight:700;opacity:.9">APP ISCRIZIONI ATLETI</span>
+       <span style="display:block;font-size:24px;font-weight:800;margin-top:4px">APRI I CORSI PLUS →</span>
+    </a>
+    <p class="note" style="margin-top:-6px">È la stessa app che usano i ragazzi: iscritti, riserve e riepilogo.</p>`;
 }
 
 function renderPlusWeek(){
