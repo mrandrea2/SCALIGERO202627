@@ -104,13 +104,12 @@
 
     <div class="dsel" id="dsel"></div>
 
-    <h2>Gruppo</h2>
+    <h2 id="titGruppo">Cosa si fa oggi</h2>
     <div class="dsel" id="tiposel"></div>
-    <div class="chips" id="chips"></div>
 
     <div id="exercises"></div>
 
-    <h2>Corsi Plus di oggi</h2>
+    <h2 id="titPlus">Corsi Plus di oggi</h2>
     <div id="plusToday"></div>
   </section>
 
@@ -381,9 +380,9 @@ function renderHero(){
   const lab = document.getElementById("herolab");
   const meta = document.getElementById("herometa");
   if(idx===null){
-    lab.textContent = "WEEKEND";
-    document.getElementById("herotheme").textContent = "Nessuna seduta";
-    meta.textContent = "Scegli un giorno qui sotto per vedere il tema.";
+    lab.textContent = "OGGI NON SI LAVORA";
+    document.getElementById("herotheme").textContent = "Weekend";
+    meta.textContent = "Gli allenamenti vanno dal lunedì al venerdì.";
   } else {
     const isToday = (selDayIdx===null || selDayIdx===t);
     lab.textContent = isToday ? "OGGI SI LAVORA SU" : DAYS[idx]+" SI LAVORA SU";
@@ -398,17 +397,7 @@ function renderChips(){
   ts.innerHTML = [["scuola","SCUOLA TENNIS"],["agonisti","AGONISTI"]].map(([k,l])=>
     `<button data-t="${k}" class="${k===selTipo?"on":""}">${l}</button>`).join("");
   ts.querySelectorAll("button").forEach(b=>b.onclick=()=>{
-    selTipo = b.dataset.t; store.set("tipo",selTipo);
-    const first = LEVELS.find(l=>l.tipo===selTipo);
-    selLevel = first.id; store.set("level",selLevel);
-    renderAll();
-  });
-  const el = document.getElementById("chips");
-  el.innerHTML = LEVELS.filter(l=>l.tipo===selTipo).map(l=>
-    `<button class="chip ${l.id===selLevel?"on":""}" data-l="${l.id}">${l.nome}<small>${l.eta} anni</small></button>`
-  ).join("");
-  el.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
-    selLevel=b.dataset.l; store.set("level",selLevel); renderAll();
+    selTipo = b.dataset.t; store.set("tipo",selTipo); renderAll();
   });
 }
 
@@ -416,15 +405,35 @@ function renderExercises(){
   const box = document.getElementById("exercises");
   const t = todayDayIdx();
   const idx = selDayIdx===null ? t : selDayIdx;
-  if(idx===null){ box.innerHTML=""; return; }
-  const theme = THEMES[GRID[currentWeekLetter()][idx]];
-  const list = (EX[theme]||{})[selLevel]||[];
-  let html = `<div class="card"><h3>${theme}</h3><ul class="ex">${
-    list.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+  const wk = currentWeekLetter();
+
+  if(idx===null){
+    document.getElementById("titGruppo").textContent = "Cosa si fa lunedì";
+    box.innerHTML = `<div style="background:${C.card};border:1px solid ${C.line};border-radius:12px;padding:14px">
+      <b style="color:${C.terra}">Oggi non c'è allenamento.</b>
+      <div style="margin-top:6px;font-size:15px">Si lavora dal lunedì al venerdì.
+      Lunedì il tema sarà <b>${THEMES[GRID[wk][0]]}</b>.</div>
+      <div style="margin-top:6px;font-size:14px;color:${C.inkSoft}">Tocca un giorno qui sopra per vedere gli esercizi.</div></div>`;
+    return;
+  }
+
+  const theme = THEMES[GRID[wk][idx]];
+  const isToday = (selDayIdx===null || selDayIdx===t);
+  document.getElementById("titGruppo").textContent =
+    (isToday ? "Cosa si fa oggi" : "Cosa si fa " + DAYS[idx].toLowerCase()) + " · " + theme;
+
+  const gruppi = LEVELS.filter(l=>l.tipo===selTipo);
+  let html = gruppi.map(l=>{
+    const list = (EX[theme]||{})[l.id]||[];
+    return `<div class="fcard"><h4>${l.nome} <em>${l.eta} anni</em></h4>
+      <ul>${list.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+  }).join("");
+
   if(theme==="VELOCITÀ"){
-    html += `<div class="card vt"><h3>Visual training</h3>
-      <ul class="ex">${VISUAL[selLevel].map(x=>`<li>${x}</li>`).join("")}</ul>
-      <p class="note" style="color:#B9D2BD">Da inserire quando possibile negli allenamenti di velocità.</p></div>`;
+    html += `<div class="fcard vtcard"><h4>VISUAL TRAINING <em>da inserire quando possibile</em></h4></div>`;
+    html += gruppi.map(l=>
+      `<div class="fcard vtcard"><h4>${l.nome}</h4>
+       <ul>${(VISUAL[l.id]||[]).map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
   }
   box.innerHTML = html;
 }
@@ -464,27 +473,21 @@ function renderPlusToday(){
   const t = todayDayIdx();
   const idx = selDayIdx===null ? t : selDayIdx;
   const box = document.getElementById("plusToday");
-  if(idx===null){ box.innerHTML = `<p class="note">Nessun corso Plus nel weekend.</p>`; return; }
+  const tit = document.getElementById("titPlus");
+  if(idx===null){
+    tit.style.display = "none";
+    box.innerHTML = "";
+    return;
+  }
+  const isToday = (selDayIdx===null || selDayIdx===t);
+  tit.style.display = "";
+  tit.textContent = isToday ? "Corsi Plus di oggi" : "Corsi Plus di " + DAYS[idx].toLowerCase();
   box.innerHTML = `<div class="steps">` + PLUS[idx].map((m,i)=>
     `<div class="step" style="display:flex;align-items:center;gap:10px">
        <span style="background:var(--dark);color:#fff;border-radius:8px;padding:6px 9px;font-weight:800;font-size:13px;white-space:nowrap">${SLOTS[i]}</span>
        <b style="font-size:16px;color:${m==="CALCETTONE"?"var(--terra)":"var(--dark)"}">${m}</b>
        ${m==="FORZA"?'<span style="font-size:12px;color:#4A5A50">max 5</span>':""}
      </div>`).join("") + `</div>`;
-}
-
-function renderPlusLink(){
-  const el = document.getElementById("plusLinkTop");
-  if(!el) return;
-  el.innerHTML = `
-    <a href="${PLUS_APP_URL}" target="_blank" rel="noopener"
-       style="display:block;background:var(--terra);color:#fff;text-decoration:none;
-       border-radius:14px;padding:20px 16px;text-align:center;margin:4px 0 12px;
-       box-shadow:0 4px 14px rgba(196,85,59,.35)">
-       <span style="display:block;font-size:12px;letter-spacing:2px;font-weight:700;opacity:.9">APP ISCRIZIONI ATLETI</span>
-       <span style="display:block;font-size:24px;font-weight:800;margin-top:4px">APRI I CORSI PLUS →</span>
-    </a>
-    <p class="note" style="margin-top:-6px">È la stessa app che usano i ragazzi: iscritti, riserve e riepilogo.</p>`;
 }
 
 function renderPlusWeek(){
