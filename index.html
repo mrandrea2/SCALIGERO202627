@@ -80,6 +80,14 @@
   .dsel button{flex:1;background:#fff;border:2px solid var(--line);border-radius:10px;
     padding:9px 0;font-weight:800;font-size:14px;color:var(--ink);cursor:pointer}
   .dsel button.on{background:var(--dark);border-color:var(--dark);color:#fff}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+  .fcard h4{margin:0 0 6px;font-size:16px;font-weight:800;color:var(--dark)}
+  .fcard h4 em{font-style:normal;font-weight:600;font-size:13px;color:#4A5A50}
+  .fcard ul{margin:0;padding-left:18px}
+  .fcard li{font-size:14.5px;margin:4px 0;line-height:1.35}
+  .vtcard{background:var(--dark);border-color:var(--dark)}
+  .vtcard h4,.vtcard h4 em{color:#fff}
+  .vtcard li{color:#E4EFE6}
 </style>
 </head>
 <body>
@@ -152,7 +160,7 @@
     </div>
     <h2>Tabella riferimenti</h2>
     <div id="reftab"></div>
-    <p class="note">Valori indicativi di partenza: dopo la prima campagna di test si ritarano sui dati reali del circolo. Il file Excel completo è su Drive.</p>
+    <p class="note">Soglie tarate sui test di settembre 2026 (58 agonisti del circolo): circa un quarto degli atleti per livello, per età e sesso. Sit and reach con lo zero sulla punta dei piedi (valori negativi = non si arriva alle punte). Il file Excel completo è su Drive.</p>
   </section>
 
   <!-- LIVELLI -->
@@ -290,22 +298,22 @@ const BANDS = ["8-9","10-11","12-13","14-15","16-18"];
 // soglie [ottimo, buono, sufficiente] per fascia
 const REF = {
   M:{
-  "Sit and reach":   [[25,18,10],[26,19,11],[27,20,12],[28,21,13],[30,23,15]],
-  "Salto in lungo":  [[150,130,110],[165,145,125],[185,160,140],[205,180,155],[225,200,175]],
-  "Lancio dorsale":  [[6.0,5.0,4.0],[7.0,6.0,5.0],[8.5,7.0,6.0],[10.0,8.5,7.0],[11.5,10.0,8.5]],
-  "Navetta 8 m × 6": [[15.5,16.5,17.5],[14.8,15.8,16.8],[14.0,15.0,16.0],[13.3,14.3,15.3],[12.8,13.8,14.8]],
-  "Sprint 20 m":     [[4.00,4.30,4.60],[3.80,4.10,4.40],[3.55,3.85,4.15],[3.30,3.60,3.90],[3.15,3.45,3.75]],
-  "Navetta 5 m × 4": [[6.30,6.80,7.30],[6.00,6.50,7.00],[5.70,6.20,6.70],[5.45,5.95,6.45],[5.30,5.80,6.30]],
-  "Beep test":       [[900,700,500],[1100,850,600],[1300,1000,750],[1500,1200,900],[1700,1350,1000]]
+    "Sit and reach": [[5, 0, -8], [5, 0, -8], [5, 0, -8], [5, 0, -8], [5, 0, -8]],
+    "Salto in lungo": [[161, 137, 128], [175, 151, 141], [193, 169, 160], [211, 187, 178], [234, 210, 201]],
+    "Lancio dorsale": [[4.2, 2.7, 1.8], [5.9, 4.3, 3.4], [8, 6.4, 5.5], [10.1, 8.6, 7.7], [12.8, 11.2, 10.4]],
+    "Navetta 8 m × 6": [[14.54, 15.21, 15.89], [14.09, 14.76, 15.43], [13.48, 14.15, 14.82], [12.87, 13.54, 14.21], [12.11, 12.78, 13.45]],
+    "Sprint 20 m": [[3.61, 3.77, 3.92], [3.5, 3.66, 3.82], [3.35, 3.52, 3.67], [3.21, 3.37, 3.52], [3.02, 3.19, 3.34]],
+    "Navetta 5 m × 4": [[6.23, 6.69, 6.98], [6.09, 6.55, 6.83], [5.9, 6.36, 6.64], [5.71, 6.16, 6.45], [5.47, 5.93, 6.21]],
+    "Beep test": [[1240, 940, 840], [1380, 1080, 960], [1560, 1260, 1140], [1740, 1440, 1340], [1960, 1680, 1560]]
   },
   F:{
-  "Sit and reach":   [[27,20,12],[29,22,14],[31,24,16],[32,25,17],[33,26,18]],
-  "Salto in lungo":  [[145,125,105],[158,138,118],[172,150,130],[180,158,138],[190,168,145]],
-  "Lancio dorsale":  [[5.5,4.5,3.6],[6.4,5.4,4.4],[7.5,6.2,5.2],[8.3,7.0,5.8],[9.0,7.6,6.3]],
-  "Navetta 8 m × 6": [[15.9,16.9,17.9],[15.3,16.3,17.3],[14.7,15.7,16.7],[14.3,15.3,16.3],[14.0,15.0,16.0]],
-  "Sprint 20 m":     [[4.10,4.40,4.70],[3.92,4.22,4.52],[3.75,4.05,4.35],[3.62,3.92,4.22],[3.55,3.85,4.15]],
-  "Navetta 5 m × 4": [[6.45,6.95,7.45],[6.20,6.70,7.20],[5.98,6.48,6.98],[5.82,6.32,6.82],[5.72,6.22,6.72]],
-  "Beep test":       [[800,620,450],[950,740,520],[1080,840,620],[1180,920,680],[1250,980,720]]
+    "Sit and reach": [[12, 8, 2], [12, 8, 2], [12, 8, 2], [12, 8, 2], [12, 8, 2]],
+    "Salto in lungo": [[173, 167, 155], [175, 169, 157], [178, 172, 160], [181, 175, 163], [185, 178, 167]],
+    "Lancio dorsale": [[6.1, 5.5, 4.5], [6.4, 5.8, 4.9], [6.9, 6.3, 5.4], [7.4, 6.8, 5.9], [8.1, 7.4, 6.5]],
+    "Navetta 8 m × 6": [[13.76, 14.41, 14.98], [13.76, 14.41, 14.98], [13.76, 14.41, 14.98], [13.76, 14.41, 14.98], [13.76, 14.41, 14.98]],
+    "Sprint 20 m": [[3.56, 3.63, 3.73], [3.56, 3.63, 3.73], [3.56, 3.63, 3.73], [3.55, 3.63, 3.73], [3.55, 3.63, 3.73]],
+    "Navetta 5 m × 4": [[6.37, 6.49, 6.76], [6.34, 6.46, 6.72], [6.3, 6.42, 6.68], [6.26, 6.38, 6.64], [6.2, 6.33, 6.59]],
+    "Beep test": [[1200, 1020, 840], [1200, 1020, 840], [1200, 1020, 840], [1200, 1020, 840], [1200, 1020, 840]]
   }
 };
 const LIV = [
@@ -409,11 +417,11 @@ function renderExercises(){
 
   if(idx===null){
     document.getElementById("titGruppo").textContent = "Cosa si fa lunedì";
-    box.innerHTML = `<div style="background:${C.card};border:1px solid ${C.line};border-radius:12px;padding:14px">
-      <b style="color:${C.terra}">Oggi non c'è allenamento.</b>
+    box.innerHTML = `<div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px">
+      <b style="color:var(--terra)">Oggi non c'è allenamento.</b>
       <div style="margin-top:6px;font-size:15px">Si lavora dal lunedì al venerdì.
       Lunedì il tema sarà <b>${THEMES[GRID[wk][0]]}</b>.</div>
-      <div style="margin-top:6px;font-size:14px;color:${C.inkSoft}">Tocca un giorno qui sopra per vedere gli esercizi.</div></div>`;
+      <div style="margin-top:6px;font-size:14px;color:#4A5A50">Tocca un giorno qui sopra per vedere gli esercizi.</div></div>`;
     return;
   }
 
