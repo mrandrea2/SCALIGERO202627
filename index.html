@@ -88,6 +88,9 @@
   .vtcard{background:var(--dark);border-color:var(--dark)}
   .vtcard h4,.vtcard h4 em{color:#fff}
   .vtcard li{color:#E4EFE6}
+  .anrow{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px}
+  .anrow:first-child{border-top:0}
+  .anrow b{color:var(--terra);font-size:13px;letter-spacing:.5px}
 </style>
 </head>
 <body>
@@ -147,6 +150,86 @@
 
   <!-- TEST -->
   <section id="tab-test" class="hidden">
+    <div class="dsel" id="testSub" style="margin-top:14px">
+      <button data-v="an" class="on">ANALISI GRUPPO</button>
+      <button data-v="va">VALUTA UN RISULTATO</button>
+    </div>
+
+    <div id="testAn">
+      <div class="card" style="background:var(--dark);border-color:var(--dark);color:#fff">
+        <div style="font-size:12px;letter-spacing:1.5px;color:var(--lime);font-weight:700">TEST DI SETTEMBRE 2026</div>
+        <div style="font-size:22px;font-weight:800;margin-top:2px">58 agonisti testati</div>
+        <div style="font-size:14px;color:#CFE3D2;margin-top:2px">42 maschi · 16 femmine · 10–18 anni</div>
+      </div>
+
+      <h2>Giudizio complessivo</h2>
+      <div class="card">
+        <div style="display:flex;height:34px;border-radius:8px;overflow:hidden;font-weight:800;font-size:14px">
+          <div style="flex:7;background:#63BE7B;display:flex;align-items:center;justify-content:center">7</div>
+          <div style="flex:21;background:#FFEB84;display:flex;align-items:center;justify-content:center">21</div>
+          <div style="flex:24;background:#FCAA5B;display:flex;align-items:center;justify-content:center">24</div>
+          <div style="flex:6;background:#F8696B;display:flex;align-items:center;justify-content:center">6</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:#4A5A50;margin-top:6px">
+          <span>Ottimo</span><span>Buono</span><span>Sufficiente</span><span>Scarso</span>
+        </div>
+        <p class="note" style="margin:8px 0 0">I livelli sono tarati su questo gruppo: dicono chi sta meglio o peggio dentro al circolo e servono a misurare i progressi a gennaio e maggio.</p>
+      </div>
+
+      <h2>Due priorità per tutti</h2>
+      <div class="card" style="border-left:6px solid var(--terra)">
+        <h3>1 · Flessibilità nei maschi</h3>
+        <div style="display:flex;gap:10px;margin:6px 0 10px">
+          <div style="flex:1;background:#FBE3DF;border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:24px;font-weight:800;color:var(--terra)">19 / 42</div>
+            <div style="font-size:12px">maschi non arrivano alle punte</div></div>
+          <div style="flex:1;background:var(--pale);border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:24px;font-weight:800;color:var(--dark)">3 / 16</div>
+            <div style="font-size:12px">ragazze non arrivano alle punte</div></div>
+        </div>
+        <p style="margin:0;font-size:15px"><b>Cosa fare:</b> 8-10 minuti di mobilità della catena posteriore in <b>ogni</b> attivazione, non solo nella giornata dedicata. La flessibilità non è legata alle altre capacità: va allenata a parte e con costanza.</p>
+      </div>
+      <div class="card" style="border-left:6px solid var(--terra)">
+        <h3>2 · Cambi di direzione</h3>
+        <div style="background:#FBE3DF;border-radius:10px;padding:10px;text-align:center;margin:6px 0 10px">
+          <div style="font-size:24px;font-weight:800;color:var(--terra)">40 / 56</div>
+          <div style="font-size:12px">perdono 2,51″ o più tra navetta 5×4 e sprint 20 m (mediana 2,70″)</div></div>
+        <p style="margin:0;font-size:15px"><b>Cosa fare:</b> nelle giornate di velocità, priorità a frenata in 2-3 appoggi, split-step su stimolo e navette in open/neutral, più che allo sprint in linea. I ragazzi corrono bene dritti ma perdono tempo nelle ripartenze.</p>
+        <p class="note" style="margin:8px 0 0">Prima di gennaio: verificare che il tocco a terra nella navetta sia eseguito da tutti nello stesso modo.</p>
+      </div>
+
+      <h2>Cosa dicono i dati</h2>
+      <div class="card">
+        <h3>Le capacità viaggiano insieme</h3>
+        <p style="margin:0;font-size:15px">Al netto di età e sesso, salto, lancio, sprint, navette e beep test sono fortemente collegati: chi è sviluppato lo è in tutto, chi è indietro lo è in tutto. Per i più deboli serve <b>sviluppo generale</b> (corpo libero, coordinazione, corsa), non inseguire il singolo test.</p>
+      </div>
+      <div class="card">
+        <h3>12-13 anni: attenzione alla crescita</h3>
+        <p style="margin:0;font-size:15px">In questa fascia 11 ragazzi su 16 sono tra sufficiente e scarso: i risultati sono poco omogenei da un test all'altro, tipico degli anni del picco di crescita. Meno impatti e salti ripetuti, più tecnica e mobilità, e giudizi da leggere con cautela.</p>
+      </div>
+
+      <h2>Cosa lavorare nei temi della rotazione</h2>
+      <div class="card" style="padding:4px 14px">
+        <div class="anrow"><b>VELOCITÀ</b><span>Frenate, split-step su stimolo, navette open e neutral. Cambi di direzione prima dello sprint in linea.</span></div>
+        <div class="anrow"><b>COORDINAZIONE / RITMO</b><span>Inserire 8-10′ di mobilità posteriore. Appoggi e ritmo nei cambi di direzione.</span></div>
+        <div class="anrow"><b>FORZA</b><span>Corpo libero, salti e lanci per chi è indietro. Nei 12-13 anni ridurre i balzi ripetuti e curare la tecnica.</span></div>
+        <div class="anrow"><b>RESISTENZA</b><span>Intermittente come da programma; più volume per chi ha beep test o navetta 8×6 bassi.</span></div>
+        <div class="anrow"><b>GIOCHI</b><span>Preferire giochi con frenate e ripartenze (ruba-coda, palla avvelenata, inseguimenti).</span></div>
+      </div>
+
+      <h2>Da recuperare</h2>
+      <div class="card">
+        <ul style="margin:0;padding-left:20px;font-size:15px">
+          <li><b>Navetta 8×6:</b> 5 atleti</li>
+          <li><b>Beep test:</b> 5 atleti</li>
+          <li><b>Lancio e navetta 5×4:</b> 2 atleti · <b>salto e sprint:</b> 1 atleta</li>
+        </ul>
+        <p class="note" style="margin:8px 0 0">Nomi nel file Excel su Drive. A gennaio aggiungere l'<b>altezza da seduti</b>: con altezza, peso ed età si stima quanto ogni ragazzo è vicino al picco di crescita.</p>
+      </div>
+      <p class="note">Analisi di gruppo, senza nomi: questa app è raggiungibile con un link. Risultati individuali e report degli atleti restano su Drive.</p>
+    </div>
+
+    <div id="testVa" class="hidden">
     <h2>Valuta un risultato</h2>
     <div class="card">
       <div class="dsel" style="flex-wrap:wrap">
@@ -161,6 +244,7 @@
     <h2>Tabella riferimenti</h2>
     <div id="reftab"></div>
     <p class="note">Soglie tarate sui test di settembre 2026 (58 agonisti del circolo): circa un quarto degli atleti per livello, per età e sesso. Sit and reach con lo zero sulla punta dei piedi (valori negativi = non si arriva alle punte). Il file Excel completo è su Drive.</p>
+    </div>
   </section>
 
   <!-- LIVELLI -->
@@ -610,6 +694,13 @@ document.querySelectorAll("nav button").forEach(b=>{
   };
 });
 
+document.querySelectorAll("#testSub button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll("#testSub button").forEach(x=>x.classList.toggle("on", x===b));
+    document.getElementById("testAn").classList.toggle("hidden", b.dataset.v!=="an");
+    document.getElementById("testVa").classList.toggle("hidden", b.dataset.v!=="va");
+  };
+});
 renderLevels();
 renderTestUI();
 renderRefTable();
