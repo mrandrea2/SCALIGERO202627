@@ -137,8 +137,11 @@
   <section id="tab-plus" class="hidden">
     <h2>Corsi Plus agonisti</h2>
     <div id="plusLinkTop"></div>
-    <p class="note">Tre moduli al giorno, ruotano di orario ogni giorno. Gli atleti si iscrivono dalla app Corsi Plus.</p>
+    <p class="note">Tre moduli al giorno. Cambiano orario ogni giorno e ogni settimana (ciclo di 3 settimane): chi viene sempre lo stesso giorno alla stessa ora li fa tutti. Venerdì 17:30 sempre calcettone.</p>
+    <h3 id="plusWeekTit" style="margin:14px 0 6px">Questa settimana</h3>
     <div id="plusWeek"></div>
+    <h3 id="plusNextTit" style="margin:18px 0 6px">Prossima settimana</h3>
+    <div id="plusNext"></div>
     <h2>Struttura di ogni seduta Plus</h2>
     <div class="steps">
       <div class="step"><b>INIZIALE</b> · Mobilità</div>
@@ -357,10 +360,10 @@ const VISUAL = {
 // App iscrizioni Corsi Plus (quella che ricevono gli atleti).
 const PLUS_APP_URL = "https://bit.ly/PLUSSCALIGERO";
 
-/* ---------- CORSI PLUS: rotazione giornaliera degli orari ---------- */
+/* ---------- CORSI PLUS: schema base (settimana del 19/10/2026), poi ruota ogni settimana ---------- */
 const SLOTS = ["15:30 – 16:30","16:30 – 17:30","17:30 – 18:30"];
 // per ogni giorno lun..ven i tre moduli nei tre slot
-const PLUS = {
+const PLUS_BASE = {
   0:["FORZA","VELOCITÀ","RESISTENZA"],
   1:["VELOCITÀ","RESISTENZA","FORZA"],
   2:["RESISTENZA","FORZA","VELOCITÀ"],
@@ -429,6 +432,24 @@ function mondayOf(d){
   x.setDate(x.getDate()-dow);
   return x;
 }
+
+/* ---- rotazione dei Plus anche tra le settimane (ciclo di 3) ----
+   La settimana del 19/10/2026 e quelle precedenti usano lo schema base.
+   Ogni settimana successiva ogni modulo scala di un'ora; venerdì 17:30 resta il calcettone. */
+const PLUS_ROT_START = "2026-10-19";
+function plusCiclo(monday){
+  const a = mondayOf(new Date(PLUS_ROT_START+"T12:00:00"));
+  const d = Math.round((monday - a)/(7*24*3600*1000));
+  return d < 0 ? 0 : d % 3;
+}
+function plusGiorno(di, monday){
+  const k = plusCiclo(monday);
+  if(di === 4){ const F=["VELOCITÀ","RESISTENZA","FORZA"]; return [F[k%3], F[(k+1)%3], "CALCETTONE"]; }
+  const b = PLUS_BASE[di];
+  return [b[k%3], b[(k+1)%3], b[(k+2)%3]];
+}
+function plusSettimana(monday){ const o={}; for(let i=0;i<5;i++) o[i]=plusGiorno(i,monday); return o; }
+const PLUS = plusSettimana(mondayOf(new Date()));   // settimana in corso
 function currentWeekLetter(){
   const anchor = mondayOf(new Date(store.get("anchor",DEFAULT_ANCHOR)+"T12:00:00"));
   const thisMon = mondayOf(new Date());
@@ -596,19 +617,27 @@ function renderPlusLink(){
     <p class="note" style="margin-top:-6px">È la stessa app che usano i ragazzi: iscritti, riserve e riepilogo.</p>`;
 }
 
-function renderPlusWeek(){
+function plusTable(P, evidenziaOggi){
   let h = `<table><tr><th></th>${SLOTS.map(s=>`<th>${s.replace(" – ","<br>")}</th>`).join("")}</tr>`;
-  const t = todayDayIdx();
+  const t = evidenziaOggi ? todayDayIdx() : null;
   DAYS.forEach((d,i)=>{
     h += `<tr class="${i===t?"now":""}"><td class="wk" style="font-size:13px">${d}</td>`;
-    PLUS[i].forEach(m=>{
+    P[i].forEach(m=>{
       const cal = m==="CALCETTONE";
       h += `<td style="${cal?"background:#C4553B;color:#fff;border-color:#C4553B":""}">${m}</td>`;
     });
     h += `</tr>`;
   });
-  h += `</table>`;
-  document.getElementById("plusWeek").innerHTML = h;
+  return h + `</table>`;
+}
+function renderPlusWeek(){
+  const mon = mondayOf(new Date());
+  const next = new Date(mon); next.setDate(next.getDate()+7);
+  const f = new Intl.DateTimeFormat("it-IT",{day:"numeric",month:"short"});
+  document.getElementById("plusWeekTit").textContent = "Questa settimana · dal "+f.format(mon)+" · ciclo "+(plusCiclo(mon)+1)+"/3";
+  document.getElementById("plusNextTit").textContent = "Prossima settimana · dal "+f.format(next)+" · ciclo "+(plusCiclo(next)+1)+"/3";
+  document.getElementById("plusWeek").innerHTML = plusTable(PLUS, true);
+  document.getElementById("plusNext").innerHTML = plusTable(plusSettimana(next), false);
 }
 
 /* ---- TEST ---- */
